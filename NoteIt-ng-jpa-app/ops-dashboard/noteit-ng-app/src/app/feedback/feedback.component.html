@@ -1,0 +1,70 @@
+<div class= "container">
+	<div class="row">
+		<div class="offset-3"></div>
+		<div class="col-md-6">
+		<form name="form"  
+				#f= "ngForm" 
+				class="feedback-form"  
+				(ngSubmit)="f.form.valid && sendFeedback()" 
+				novalidate>
+
+			<!-- Name-->
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input type="text" 
+						class="form-control" 
+						id="name"  
+						placeholder="Your Name" 
+						name="name"
+						#name= "ngModel" 
+						[(ngModel)]="model.name" 
+						[ngClass]="{'is-invalid':f.submitted && name.invalid}" required  minlength='4' />
+				<!--Name invalid error message-->
+				<div *ngIf="f.submitted && name.invalid " class="invalid-input">
+					<div *ngIf="name.errors?.required"> Name is invalid</div>
+					<div *ngIf="name.errors?.minlength"> Name should be more than 4 characters</div>
+				</div>
+			</div> 
+
+			<!--Email-->
+			<div class="form-group">
+				<label for="email">Email Address</label>
+				<input type="email" 
+						class="form-control" 
+						id="email" 
+						placeholder="name@example.com" 
+						[(ngModel)]="model.email" 
+						name="email" 
+						#emailid= "ngModel" 
+						[ngClass]="{'is-invalid':f.submitted && emailid.invalid}" required email />
+				<!--Name invalid error message-->
+				<div *ngIf="f.submitted && emailid.invalid">
+					<div *ngIf="emailid.errors.required"> Email is required</div>
+					<div *ngIf="emailid.errors.email"> Email is not valid</div>
+				</div>
+		  	</div>
+	 
+			<!--Feedback-->
+			<div class="form-group">
+				<label for="exampleFormControlTextarea1">Feedback</label>
+				<textarea class="form-control" 
+							id="exampleFormControlTextarea1" 
+							rows="3" 
+							[(ngModel)]="model.feedback" 
+							name="feedback"
+							[ngClass]="{'is-invalid':f.submitted && message.invalid}"
+							#message = "ngModel"
+							required >
+				</textarea>
+				<!--Name invalid error message-->
+				<div *ngIf="f.submitted && message.invalid">
+					<div *ngIf="message.errors.required"> Feedback Message is required</div>
+					
+				</div>
+			</div>
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+	<div class="offset-3"></div>
+</div>
+</div>
